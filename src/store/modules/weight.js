@@ -1,7 +1,7 @@
 import { createStore } from "redux";
 
-const weight = 100;
-export default function weightReducer(state = weight, action) {
+const weightState = 100;
+export default function weightReducer(state = weightState, action) {
   const date = new Date().getDate();
   const month = new Date().getMonth() + 1;
   if (action.type === "살찌기") {
