@@ -147,6 +147,11 @@ export function next() {
     type: NEXT,
   };
 }
+export function reset() {
+  return {
+    type: RESET,
+  };
+}
 export default function mbti(state = initState, action) {
   switch (action.type) {
     case CHECK:
