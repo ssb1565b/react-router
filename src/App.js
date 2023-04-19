@@ -1,27 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
-import Mbti from "./pages/Mbti";
-import Show from "./pages/Show";
-import Start from "./pages/Start";
-
-const Main = styled.main`
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 500px;
-  padding: 0 35px;
-  margin: auto;
-  text-align: center;
-`;
+import { Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import Main from "./pages/Main";
 
 function App() {
-  const page = useSelector((state) => state.mbti.page);
-  const survey = useSelector((state) => state.mbti.survey);
+  const isLogin = useSelector((state) => state.user.isLogin);
   return (
     <>
-      <Main>
-        {page === 0 ? <Start /> : page <= survey.length ? <Mbti /> : <Show />}
-      </Main>
+      <Routes>
+        <Route path="/" element={isLogin ? <Main /> : <Login />}></Route>
+      </Routes>
     </>
   );
 }

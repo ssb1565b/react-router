@@ -1,4 +1,3 @@
-// 초기 상태 설정
 const initState = {
   mbtiResult: "",
   page: 0, // 0: 인트로 페이지, 1 ~ n: 선택 페이지, n+1: 결과 페이지
@@ -129,12 +128,27 @@ const initState = {
   // explanation을 배열이 아닌 객체로 준 이유는 key값으로 접근하기 위해서! 예를들어 onj[mbtiResult]로 하면 됨
 };
 
+const initStateEmpty = {
+  mbtiResult: "",
+  page: 0,
+  survey: [],
+  explanation: {},
+};
+
 // Action 타입(문자열)
+const INIT = "mbti/INIT";
 const CHECK = "mbti/CHECK";
 const NEXT = "mbti/NEXT";
 const RESET = "mbti/RESET";
 
 // Action 생성 함수 설정
+export function init(data) {
+  return {
+    type: INIT,
+    payload: data,
+  };
+}
+
 export function check(result) {
   return {
     type: CHECK,
@@ -152,8 +166,14 @@ export function reset() {
     type: RESET,
   };
 }
-export default function mbti(state = initState, action) {
+export default function mbti(state = initStateEmpty, action) {
   switch (action.type) {
+    case INIT:
+      return {
+        ...state,
+        survey: action.payload.survey,
+        explanation: action.payload.explanation,
+      };
     case CHECK:
       return {
         ...state,
